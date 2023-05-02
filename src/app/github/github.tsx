@@ -13,12 +13,13 @@ const Github: FC = () => {
     const [username, setUserName] = useState('');
 
     const octokit = new Octokit({
-        auth: "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",
+        auth: process.env.GIT_KEY
     });
 
     async function getTest() {
+        console.log(username);
         const response = await octokit.request(`GET /users/${username}/repos`, {
-            username: "USERNAME",
+            username: 'USERNAME',
             headers: {
                 "X-GitHub-Api-Version": "2022-11-28",
             },
@@ -27,7 +28,6 @@ const Github: FC = () => {
     }
 
     const handleSubmit = () => {
-        console.log(username);
         if(username){
             getTest();
         }
@@ -37,7 +37,7 @@ const Github: FC = () => {
         <main className="w-4/5 my-0 mr-auto	 ml-auto pt-10">
             <div className="mb-4 flex justify-evenly">
                 <input className="shadow appearance-none border rounded w-80 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" onChange={(e) => setUserName(e.target.value)}/>
-                <button onClick={handleSubmit}>Go</button>
+                <button onClick={handleSubmit} className="border border-white-400 px-4 py-2 rounded hover:border-white-900">Go</button>
             </div>
             {gitData.map((data) => {
                 return (

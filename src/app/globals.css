@@ -18,7 +18,8 @@
 
 body {
   /* color: rgb(var(--foreground-rgb)); */
-  
+  background-color: #553344;
+  color: white
   /* background: linear-gradient(
       to bottom,
       transparent,
