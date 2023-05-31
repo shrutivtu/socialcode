@@ -1,8 +1,9 @@
+import { FC } from 'react';
 import Image from 'next/image'
 import img5 from '../../public/img5.png';
 
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   return (
     <>
       <main className="w-full">
@@ -20,7 +21,6 @@ const Home: React.FC = () => {
             </div>
           </section>
         </div>
-        
       </main>
     </>
   );
