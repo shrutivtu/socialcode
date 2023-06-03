@@ -1,0 +1,6 @@
+.MuiPaginationItem-root{
+    background-color: #3D1D2E;
+}
+.MuiButtonBase-root .MuiPaginationItem-root .Mui-selected{
+    background-color: black;
+}
