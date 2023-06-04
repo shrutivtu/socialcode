@@ -1,19 +1,15 @@
 "use client";
 import { useState, FC, useEffect } from "react";
 import { Octokit } from "octokit";
-import { Topic } from "@/components";
-
-// interface GitData {
-//   id: number;
-//   name: string;
-//   html_url: string;
-// }
+import { Topic, Repositories } from "@/components";
 
 const Github: FC = () => {
-  const [gitData, setGitData] = useState<Array<GitData>>([]);
+  // const [gitData, setGitData] = useState<Array<GitData>>([]);
+  const [gitData, setGitData] = useState([]);
   const [username, setUserName] = useState("");
   const [topicKeyword, setTopicKeyword] = useState("");
   const [page, setPage] = useState(1);
+  const [userPref, setUserPref] = useState('');
 
   useEffect(() => {
     if(topicKeyword) getTopicResult();
@@ -85,6 +81,15 @@ const Github: FC = () => {
     setPage(value);
   };
 
+  const renderComponent = () => {
+    switch(userPref){
+      case 'UserRepositories':  <Repositories gitData={gitData} />;
+      break;
+      case 'TopicRepositories': <Topic gitData={gitData} page={page} handleChangePage={handleChange} />;
+      break;
+    }
+  }
+
   return (
     <main className="w-4/5 my-0 mr-auto	 ml-auto pt-10 mb-2">
       <div className="w-9/10 my-0 mx-auto mb-4 flex items-center justify-center relative">
@@ -93,8 +98,8 @@ const Github: FC = () => {
           id="username"
           type="text"
           placeholder="Username"
-          // onChange={(e) => setUserName(e.target.value)}
-          onChange={(e) => setTopicKeyword(e.target.value)}
+          onChange={(e) => setUserName(e.target.value)}
+          // onChange={(e) => setTopicKeyword(e.target.value)}
         />
         <button
           onClick={handleSubmit}
@@ -113,15 +118,8 @@ const Github: FC = () => {
                 </div> */}
       </div>
       <div className="w-full my-0 mx-auto pl-10 flex flex-col items-center justify-center">
-        {/* {gitData.map((data) => {
-                    return (
-                        <li key={data.id} className="flex items-center justify-between w-4/5 border h-12 px-2 mb-2">
-                            <p>{data.name}</p>
-                            <a href={data.html_url}>Click here</a>
-                        </li>
-                    );
-                })} */}
-        {gitData && <Topic gitData={gitData} page={page} handleChangePage={handleChange} />}
+        {gitData && <Repositories gitData={gitData} />}
+        {/* {gitData && <Topic gitData={gitData} page={page} handleChangePage={handleChange} />} */}
       </div>
     </main>
   );

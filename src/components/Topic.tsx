@@ -3,22 +3,12 @@ import React, { FC, useState } from "react";
 import Pagination from '@mui/material/Pagination';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../styles/globalPagination.css';
-
-interface GitData {
-    forksCount: number;
-    htmlUrl: string;
-    name: string;
-    openIssues: number;
-    topics: string[];
-    visibility: string;
-    watchers: number;
-}
+import { GitTopicProps } from "@/types";
   
 type ChildComponentProps = {
-    gitData: GitData[];
+    gitData: GitTopicProps[];
     page: number;
     handleChangePage: (event: React.ChangeEvent<unknown>, value: number) => {};
-
 };
 
 const theme = createTheme({
@@ -27,18 +17,11 @@ const theme = createTheme({
         styleOverrides: {
           ul: {
             '& .MuiPaginationItem-root': {
-              color: '#fff', // Set your desired text color here
+              color: '#fff',
             },
           },
         },
-      },
-    //   MuiPaginationItem: {
-    //     styleOverrides: {
-    //       root: {
-    //         backgroundColor: '#3D1D2E', // Set your desired background color here
-    //       },
-    //     },
-    //   },
+      }
     },
 });
 
